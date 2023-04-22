@@ -1,0 +1,18 @@
+{
+    "name": "WidgetControllers",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b62eeecee1615e349aac47c0d917db5b",
+        "GUID:95872b0452b4af94fb71c718aaec9e62",
+        "GUID:2eb8a60eaf318e64685c362ef891dd8e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

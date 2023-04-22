@@ -1,0 +1,16 @@
+{
+  "author": {
+    "name": "Little Lion",
+    "url": "https://github.com/little-lion-libraries"
+  },
+  "dependencies": {
+    "com.little-lion.numerics": "https://github.com/littlelion-libraries/numerics.git",
+    "com.little-lion.c-sharp-extensions": "https://github.com/littlelion-libraries/c-sharp-extensions.git"
+  },
+  "description": "",
+  "displayName": "Widget Controllers",
+  "keywords": [],
+  "name": "com.little-lion.widgets-controllers",
+  "unity": "2021.3",
+  "version": "1.0.0"
+}
