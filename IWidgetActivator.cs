@@ -1,19 +1,18 @@
 ﻿using Tasks;
-using Widgets;
 using WidgetTransitions;
 
 namespace WidgetControllers
 {
-    public interface IWidgetActivator
+    public interface IWidgetActivator<T>
     {
         ITask ActiveAsync(
             bool active,
             object extension,
             float time,
             ITransition transition,
-            IWidget widget
+            T widget
         );
         
-        ITask ActiveAsync(bool active, IWidgetExtension extension, float time);
+        ITask ActiveAsync(bool active, IWidgetExtension<T> extension, float time);
     }
 }

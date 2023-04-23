@@ -1,11 +1,10 @@
-﻿using Widgets;
-using WidgetTransitions;
+﻿using WidgetTransitions;
 
 namespace WidgetControllers
 {
-    public interface IWidgetExtension
+    public interface IWidgetExtension<T>
     {
-        IWidget Widget { get; }
+        T Widget { get; }
         ITransition Transition { get; }
     }
 }

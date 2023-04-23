@@ -1,18 +1,16 @@
 ﻿using System;
 using Tasks;
-using Widgets;
 using WidgetTransitions;
 
 namespace WidgetControllers
 {
-    public class WidgetActivator : IWidgetActivator
+    public class WidgetActivator<T> : IWidgetActivator<T>
     {
         public class Props
         {
-            public Action<IWidget> AddChild;
+            public Action<T> AddChild;
             public Action<Func<float, bool>> AddStep;
-            public Action<IWidget> DestroyWidget;
-            public Action<bool> Interactable;
+            public Action<T> DestroyWidget;
         }
 
         private Props _props;
@@ -27,13 +25,11 @@ namespace WidgetControllers
             object extension,
             float time,
             ITransition transition,
-            IWidget widget
+            T widget
         )
         {
-            _props.Interactable(false);
             if (active)
             {
-                widget.Visible = true;
                 _props.AddChild(widget);
             }
 
@@ -46,14 +42,11 @@ namespace WidgetControllers
             await TaskUtils.Wait(transition.Step, _props.AddStep);
             if (!active)
             {
-                widget.Visible = false;
                 _props.DestroyWidget(widget);
             }
-
-            _props.Interactable(true);
         }
 
-        public ITask ActiveAsync(bool active, IWidgetExtension extension, float time)
+        public ITask ActiveAsync(bool active, IWidgetExtension<T> extension, float time)
         {
             return ActiveAsync(active, extension, time, extension.Transition, extension.Widget);
         }
