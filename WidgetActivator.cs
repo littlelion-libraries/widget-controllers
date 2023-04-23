@@ -9,6 +9,7 @@ namespace WidgetControllers
     {
         public class Props
         {
+            public Action<IWidget> AddChild;
             public Action<Func<float, bool>> AddStep;
             public Action<IWidget> DestroyWidget;
             public Action<bool> Interactable;
@@ -33,6 +34,7 @@ namespace WidgetControllers
             if (active)
             {
                 widget.Visible = true;
+                _props.AddChild(widget);
             }
 
             if (extension is IWidgetFocusHandler focusHandler)
