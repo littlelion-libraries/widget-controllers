@@ -8,9 +8,9 @@ namespace WidgetControllers
     {
         public class Props
         {
-            public Action<T> AddChild;
+            public Action<IWidgetExtension<T>> AddChild;
             public Action<Func<float, bool>> AddStep;
-            public Action<T> DestroyWidget;
+            public Action<IWidgetExtension<T>> DestroyWidget;
         }
 
         private Props _props;
@@ -20,17 +20,11 @@ namespace WidgetControllers
             set => _props = value;
         }
 
-        public async ITask ActiveAsync(
-            bool active,
-            object extension,
-            float time,
-            ITransition transition,
-            T widget
-        )
+        public async ITask ActiveAsync(bool active, IWidgetExtension<T> extension, float time)
         {
             if (active)
             {
-                _props.AddChild(widget);
+                _props.AddChild(extension);
             }
 
             if (extension is IWidgetFocusHandler focusHandler)
@@ -38,17 +32,12 @@ namespace WidgetControllers
                 focusHandler.OnWidgetFocus(active);
             }
 
-            transition.BeginStep(!active, time);
-            await TaskUtils.Wait(transition.Step, _props.AddStep);
+            extension.Transition.BeginStep(!active, time);
+            await TaskUtils.Wait(extension.Transition.Step, _props.AddStep);
             if (!active)
             {
-                _props.DestroyWidget(widget);
+                _props.DestroyWidget(extension);
             }
-        }
-
-        public ITask ActiveAsync(bool active, IWidgetExtension<T> extension, float time)
-        {
-            return ActiveAsync(active, extension, time, extension.Transition, extension.Widget);
         }
     }
 }
