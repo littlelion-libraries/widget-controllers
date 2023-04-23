@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Tasks;
 using WidgetTransitions;
 
@@ -13,6 +14,7 @@ namespace WidgetControllers
             public Action<IWidgetExtension<T>> DestroyWidget;
         }
 
+        private readonly Queue<IWidgetExtension<T>> _extensions = new();
         private Props _props;
 
         public Props Properties
@@ -22,21 +24,35 @@ namespace WidgetControllers
 
         public async ITask ActiveAsync(bool active, IWidgetExtension<T> extension, float time)
         {
+            Focus(!active);
             if (active)
             {
                 _props.AddChild(extension);
+                _extensions.Enqueue(extension);
             }
-
-            if (extension is IWidgetFocusHandler focusHandler)
-            {
-                focusHandler.OnWidgetFocus(active);
-            }
+            Focus(extension, active);
 
             extension.Transition.BeginStep(!active, time);
             await TaskUtils.Wait(extension.Transition.Step, _props.AddStep);
             if (!active)
             {
                 _props.DestroyWidget(extension);
+            }
+        }
+
+        public void Focus(bool focus)
+        {
+            if (_extensions.TryPeek(out var value))
+            {
+                Focus(value, focus);
+            }
+        }
+
+        private static void Focus(object extension, bool focus)
+        {
+            if (extension is IWidgetFocusHandler focusHandler)
+            {
+                focusHandler.OnWidgetFocus(focus);
             }
         }
     }
