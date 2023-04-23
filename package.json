@@ -4,13 +4,14 @@
     "url": "https://github.com/little-lion-libraries"
   },
   "dependencies": {
-    "com.little-lion.numerics": "https://github.com/littlelion-libraries/numerics.git",
-    "com.little-lion.c-sharp-extensions": "https://github.com/littlelion-libraries/c-sharp-extensions.git"
+    "com.little-lion.tasks": "https://github.com/littlelion-libraries/tasks.git",
+    "com.little-lion.widgets": "https://github.com/littlelion-libraries/widgets.git",
+    "com.little-lion.widgets-transitions": "https://github.com/littlelion-libraries/widget-transitions.git"
   },
   "description": "",
   "displayName": "Widget Controllers",
   "keywords": [],
-  "name": "com.little-lion.widgets-controllers",
+  "name": "com.little-lion.widget-controllers",
   "unity": "2021.3",
-  "version": "1.0.0"
+  "version": "1.0.1"
 }

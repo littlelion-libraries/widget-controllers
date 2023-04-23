@@ -5,7 +5,7 @@ using WidgetTransitions;
 
 namespace WidgetControllers
 {
-    public class WidgetController : IWidgetController
+    public class WidgetActivator : IWidgetActivator
     {
         public class Props
         {
