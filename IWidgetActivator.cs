@@ -2,8 +2,8 @@
 
 namespace WidgetControllers
 {
-    public interface IWidgetActivator<in T>
+    public interface IWidgetActivator
     {
-        ITask ActiveAsync(bool active, IWidgetExtension<T> extension, float time);
+        ITask ActiveAsync(bool active, IWidgetExtension extension, float time);
     }
 }

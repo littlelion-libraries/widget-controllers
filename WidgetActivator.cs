@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using Tasks;
-using WidgetTransitions;
 
 namespace WidgetControllers
 {
-    public class WidgetActivator<T> : IWidgetActivator<T>
+    public class WidgetActivator : IWidgetActivator
     {
         public class Props
         {
-            public Action<IWidgetExtension<T>> AddChild;
             public Action<Func<float, bool>> AddStep;
-            public Action<IWidgetExtension<T>> DestroyWidget;
+            public Action<IWidgetExtension> DestroyWidget;
         }
 
-        private readonly Queue<IWidgetExtension<T>> _extensions = new();
+        private readonly Queue<IWidgetExtension> _extensions = new();
         private Props _props;
 
         public Props Properties
@@ -22,14 +20,14 @@ namespace WidgetControllers
             set => _props = value;
         }
 
-        public async ITask ActiveAsync(bool active, IWidgetExtension<T> extension, float time)
+        public async ITask ActiveAsync(bool active, IWidgetExtension extension, float time)
         {
             Focus(!active);
             if (active)
             {
-                _props.AddChild(extension);
                 _extensions.Enqueue(extension);
             }
+
             Focus(extension, active);
 
             extension.Transition.BeginStep(!active, time);

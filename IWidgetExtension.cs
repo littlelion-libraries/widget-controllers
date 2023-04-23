@@ -2,9 +2,8 @@
 
 namespace WidgetControllers
 {
-    public interface IWidgetExtension<out T>
+    public interface IWidgetExtension
     {
-        T Widget { get; }
         ITransition Transition { get; }
     }
 }
