@@ -13,5 +13,7 @@ namespace WidgetControllers
             ITransition transition,
             IWidget widget
         );
+        
+        ITask ActiveAsync(bool active, IWidgetExtension extension, float time);
     }
 }

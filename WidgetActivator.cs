@@ -52,5 +52,10 @@ namespace WidgetControllers
 
             _props.Interactable(true);
         }
+
+        public ITask ActiveAsync(bool active, IWidgetExtension extension, float time)
+        {
+            return ActiveAsync(active, extension, time, extension.Transition, extension.Widget);
+        }
     }
 }
